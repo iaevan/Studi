@@ -57,7 +57,7 @@ def update():
     global update_time
     update_time = stopwatch_label.after(1000, update)
 
-    if  minutes % 10 == 0:
+    if minutes != 0 and minutes % 10 == 0:
         notification.notify(
         app_name= "Studying",
         title = "Drink",
