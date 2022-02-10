@@ -6,7 +6,8 @@ notify = ToastNotifier()
 root= tk.Tk()
 root.title('Studying')
 root.geometry('600x200')
-root.iconbitmap('icon.ico')
+root.iconbitmap('G:\\flex\icon.ico')
+root.resizable(False,False)
 
 running = False
 
@@ -61,19 +62,21 @@ def update():
     update_time = stopwatch_label.after(1000, update)
 
     if minutes != 0 and minutes % 10 == 0:
+    # if seconds == 5:
         notify.show_toast(
         "Drink", 
         "drink some water, stay hydrated", 
-        icon_path='icon.ico', 
+        icon_path='G:\\flex\icon.ico', 
         duration=3, 
         threaded=True
         )
 
     if minutes != 0 and minutes % 30 == 0:
+    # if seconds == 10:
         notify.show_toast(
         "Take a break bro!", 
         "Youre studying for 30 min, take a short break", 
-        icon_path='icon.ico', 
+        icon_path='G:\\flex\icon.ico', 
         duration=3, 
         threaded=True
         )
