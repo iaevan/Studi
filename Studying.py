@@ -61,22 +61,22 @@ def update():
     global update_time
     update_time = stopwatch_label.after(1000, update)
 
-    if minutes != 0 and minutes % 10 == 0:
+    if minutes != 0 and minutes != 30 and minutes % 10 == 0:
     # if seconds == 5:
         notify.show_toast(
         "Drink", 
         "drink some water, stay hydrated", 
-        icon_path='G:\\flex\icon.ico', 
+        icon_path="", 
         duration=3, 
         threaded=True
         )
 
-    if minutes != 0 and minutes % 30 == 0:
+    if minutes != 0 and minutes != 10 and minutes % 30 == 0:
     # if seconds == 10:
         notify.show_toast(
         "Take a break bro!", 
         "Youre studying for 30 min, take a short break", 
-        icon_path='G:\\flex\icon.ico', 
+        icon_path="", 
         duration=3, 
         threaded=True
         )
