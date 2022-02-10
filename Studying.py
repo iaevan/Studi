@@ -1,9 +1,12 @@
 import tkinter as tk
-from plyer import notification
+from win10toast import ToastNotifier
+
+notify = ToastNotifier()
 
 root= tk.Tk()
 root.title('Studying')
 root.geometry('600x200')
+root.iconbitmap('icon.ico')
 
 running = False
 
@@ -58,23 +61,22 @@ def update():
     update_time = stopwatch_label.after(1000, update)
 
     if minutes != 0 and minutes % 10 == 0:
-        notification.notify(
-        app_name= "Studying",
-        title = "Drink",
-        message = "drink some water, stay hydrated",
-        timeout = 3
+        notify.show_toast(
+        "Drink", 
+        "drink some water, stay hydrated", 
+        icon_path='icon.ico', 
+        duration=3, 
+        threaded=True
         )
+
     if minutes != 0 and minutes % 30 == 0:
-        notification.notify(
-        app_name= "Studying",
-        title = "Take a break bro!",
-        message = "Youre studying for 30 min, take a short break",
-        timeout = 3
-
+        notify.show_toast(
+        "Take a break bro!", 
+        "Youre studying for 30 min, take a short break", 
+        icon_path='icon.ico', 
+        duration=3, 
+        threaded=True
         )
-
-
-
 
 
 
