@@ -1,7 +1,5 @@
-# flex
-Hmm an useless app 
-
-It should be named Studying or somthing, but it's just the pre alpha stage ig
+# Studi
+An app, basically a study timer, but has fun features.
 
 # What it does?
 1. basically a stopwatch, counts your time
