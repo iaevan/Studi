@@ -2,6 +2,10 @@ import tkinter as tk
 from ctypes import windll, byref, create_unicode_buffer, create_string_buffer
 import os
 from win10toast import ToastNotifier
+import time
+from pypresence import Presence
+
+
 
 notify = ToastNotifier()
 
@@ -9,6 +13,22 @@ notify = ToastNotifier()
 running = False
 
 hours, minutes, seconds = 0, 0, 0
+
+rpc = Presence("942139758350569493")
+rpc.connect()
+#state="Pordon me.", 
+#details = "Studying", 
+#large_image="studi", 
+#start=time.time(),
+#join="come study with me")
+rpc.update(details="Currently studying", state="Dont interrupt? pls ♥", large_image="studi", start=time.time(), buttons= [{"label": "Pc Price Tracker Bangladesh", "url": "https://www.pcpricetracker.co"},{"label": "ME", "url": "https://fb.iaevan.co"}])  # Set the presence
+
+
+
+
+
+
+
 
 
 def resource_path(relative_path):
@@ -110,6 +130,7 @@ def update():
         duration=5, 
         threaded=True
         )
+        time.sleep(70)
 
     if minutes != 0 and minutes != 10 and minutes % 30 == 0:
     # if seconds == 10:
@@ -120,6 +141,7 @@ def update():
         duration=5, 
         threaded=True
         )
+        time.sleep(70)
 
 def on_enter(e):
     e.widget['background'] = '#262626'
@@ -132,6 +154,7 @@ def on_enter_exit(e):
 
 def on_leave_exit(e):
     e.widget['background'] = "#330000"  
+
 
 
 

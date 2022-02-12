@@ -19,5 +19,5 @@ It should be named Studying or somthing, but it's just the pre alpha stage ig
 - [ ] UI Update (i know nothing about tkinter lol)
 - [x] Windows bUild
 - [ ] Android support
-- [ ] DISCORD RICH PRESSENSE BABYYYYY
+- [x] DISCORD RICH PRESSENSE BABYYYYY
 - [ ] Web support?
