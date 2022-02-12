@@ -4,9 +4,10 @@ from win10toast import ToastNotifier
 notify = ToastNotifier()
 
 root= tk.Tk()
-root.title('Studying')
+root.title('Studi')
 root.geometry('600x200')
-root.iconbitmap('G:\\flex\icon.ico')
+root.configure(bg='#333333')
+root.iconbitmap('studi.ico')
 root.resizable(False,False)
 
 running = False
@@ -81,18 +82,39 @@ def update():
         threaded=True
         )
 
+def on_enter(e):
+    e.widget['background'] = '#262626'
 
+def on_leave(e):
+    e.widget['background'] = "#191919"  
 
-stopwatch_label = tk.Label(text='00:00:00', font=('JetBrains Mono', 80))
+def on_enter_exit(e):
+    e.widget['background'] = '#3f0000'
+
+def on_leave_exit(e):
+    e.widget['background'] = "#330000"  
+
+stopwatch_label = tk.Label(text='00:00:00', font=('JetBrains Mono', 80), bg="#333333", fg="#b2b2b2")
 stopwatch_label.pack()
 
 
-start_button = tk.Button(text='start', height=5, width=7, font=('JetBrains Mono', 20), command=start)
+start_button = tk.Button(text='start', height=5, width=7, font=('JetBrains Mono', 20), command=start, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+start_button.bind("<Enter>", on_enter)
+start_button.bind("<Leave>", on_leave)
 start_button.pack(side=tk.LEFT)
-pause_button = tk.Button(text='pause', height=5, width=7, font=('JetBrains Mono', 20), command=pause)
+
+pause_button = tk.Button(text='pause', height=5, width=7, font=('JetBrains Mono', 20), command=pause, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
 pause_button.pack(side=tk.LEFT)
-reset_button = tk.Button(text='reset', height=5, width=7, font=('JetBrains Mono', 20), command=reset)
+pause_button.bind("<Enter>", on_enter)
+pause_button.bind("<Leave>", on_leave)
+
+reset_button = tk.Button(text='reset', height=5, width=7, font=('JetBrains Mono', 20), command=reset, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
 reset_button.pack(side=tk.LEFT)
-quit_button = tk.Button(text='quit', height=5, width=7, bg= "red", fg="white", font=('JetBrains Mono', 20), command=root.quit)
+reset_button.bind("<Enter>", on_enter)
+reset_button.bind("<Leave>", on_leave)
+
+quit_button = tk.Button(text='quit', height=5, width=7, bg= "#330000", fg="#b2b2b2", font=('JetBrains Mono', 20),  activebackground="#260000", activeforeground= "#b2b2b2", command=root.quit)
+quit_button.bind("<Enter>", on_enter_exit)
+quit_button.bind("<Leave>", on_leave_exit)
 quit_button.pack(side=tk.RIGHT)
 root.mainloop()

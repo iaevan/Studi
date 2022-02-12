@@ -14,7 +14,7 @@ It should be named Studying or somthing, but it's just the pre alpha stage ig
 # Things to add
 - [ ] Use [tinywintoast](https://github.com/J-CITY/tinyWinToast) for rich toast notification
 - [ ] Update the topbar, it looks so ugly rn
-- [ ] DARK THEME
+- [x] DARK THEME
 - [ ] Database Support, you'll able to keep track of your studies
 - [ ] UI Update (i know nothing about tkinter lol)
 - [x] Windows bUild
