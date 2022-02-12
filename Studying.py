@@ -1,18 +1,61 @@
 import tkinter as tk
+from ctypes import windll, byref, create_unicode_buffer, create_string_buffer
+import os
 from win10toast import ToastNotifier
 
 notify = ToastNotifier()
 
-root= tk.Tk()
-root.title('Studi')
-root.geometry('600x200')
-root.configure(bg='#333333')
-root.iconbitmap('studi.ico')
-root.resizable(False,False)
+
+
+
+FR_PRIVATE  = 0x10
+FR_NOT_ENUM = 0x20
+
+def loadfont(fontpath, private=True, enumerable=False):
+    if isinstance(fontpath, bytes):
+        pathbuf = create_string_buffer(fontpath)
+        AddFontResourceEx = windll.gdi32.AddFontResourceExA
+    elif isinstance(fontpath, str):
+        pathbuf = create_unicode_buffer(fontpath)
+        AddFontResourceEx = windll.gdi32.AddFontResourceExW
+    else:
+        raise TypeError('fontpath must be of type str or unicode')
+
+    flags = (FR_PRIVATE if private else 0) | (FR_NOT_ENUM if not enumerable else 0)
+    numFontsAdded = AddFontResourceEx(byref(pathbuf), flags, 0)
+    return bool(numFontsAdded)
+
+fontfile = "JetBrainsMono.ttf"
+fontfile_asByte= str.encode(fontfile)
+
+
+loadfont(fontfile_asByte)
+
+
+
+
+
+
 
 running = False
 
 hours, minutes, seconds = 0, 0, 0
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+iconimg= resource_path('studi.ico')
+
+font = resource_path('JetBrainsMono.ttf')
+
 
 def start():
     global running
@@ -94,26 +137,41 @@ def on_enter_exit(e):
 def on_leave_exit(e):
     e.widget['background'] = "#330000"  
 
-stopwatch_label = tk.Label(text='00:00:00', font=('JetBrains Mono', 80), bg="#333333", fg="#b2b2b2")
+
+
+
+
+
+root= tk.Tk()
+root.title('Studi')
+root.geometry('600x200')
+root.configure(bg='#333333')
+root.iconbitmap(iconimg)
+root.resizable(False,False)
+
+
+
+
+stopwatch_label = tk.Label(text='00:00:00', font=(font, 80), bg="#333333", fg="#b2b2b2")
 stopwatch_label.pack()
 
 
-start_button = tk.Button(text='start', height=5, width=7, font=('JetBrains Mono', 20), command=start, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+start_button = tk.Button(text='start', height=5, width=7, font=(font, 20), command=start, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
 start_button.bind("<Enter>", on_enter)
 start_button.bind("<Leave>", on_leave)
 start_button.pack(side=tk.LEFT)
 
-pause_button = tk.Button(text='pause', height=5, width=7, font=('JetBrains Mono', 20), command=pause, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+pause_button = tk.Button(text='pause', height=5, width=7, font=(font, 20), command=pause, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
 pause_button.pack(side=tk.LEFT)
 pause_button.bind("<Enter>", on_enter)
 pause_button.bind("<Leave>", on_leave)
 
-reset_button = tk.Button(text='reset', height=5, width=7, font=('JetBrains Mono', 20), command=reset, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+reset_button = tk.Button(text='reset', height=5, width=7, font=(font, 20), command=reset, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
 reset_button.pack(side=tk.LEFT)
 reset_button.bind("<Enter>", on_enter)
 reset_button.bind("<Leave>", on_leave)
 
-quit_button = tk.Button(text='quit', height=5, width=7, bg= "#330000", fg="#b2b2b2", font=('JetBrains Mono', 20),  activebackground="#260000", activeforeground= "#b2b2b2", command=root.quit)
+quit_button = tk.Button(text='quit', height=5, width=7, bg= "#330000", fg="#b2b2b2", font=(font, 20),  activebackground="#260000", activeforeground= "#b2b2b2", command=root.quit)
 quit_button.bind("<Enter>", on_enter_exit)
 quit_button.bind("<Leave>", on_leave_exit)
 quit_button.pack(side=tk.RIGHT)
