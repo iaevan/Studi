@@ -1,7 +1,7 @@
 import tkinter as tk
 from ctypes import windll, byref, create_unicode_buffer, create_string_buffer
 import os
-from win10toast import ToastNotifier
+from win10toast import ToastNotifier 
 import time
 from pypresence import Presence
 
@@ -12,7 +12,7 @@ notify = ToastNotifier()
 
 running = False
 
-hours, minutes, seconds = 0, 0, 0
+hours, minutes, seconds = 0, 29, 56
 
 rpc = Presence("942139758350569493")
 rpc.connect()
@@ -121,7 +121,7 @@ def update():
     global update_time
     update_time = stopwatch_label.after(1000, update)
 
-    if minutes != 0 and minutes != 30 and minutes % 10 == 0:
+    if minutes != 0 and minutes != 30 and minutes % 10 == 0 and seconds == 0:
     # if seconds == 5:
         notify.show_toast(
         "Drink", 
@@ -130,10 +130,11 @@ def update():
         duration=5, 
         threaded=True
         )
-        time.sleep(70)
 
-    if minutes != 0 and minutes != 10 and minutes % 30 == 0:
+
+    if minutes != 0 and minutes != 10 and minutes % 30 == 0 and seconds == 0:
     # if seconds == 10:
+    
         notify.show_toast(
         "Take a break bro!", 
         "Youre studying for 30 min, take a short break", 
@@ -141,7 +142,6 @@ def update():
         duration=5, 
         threaded=True
         )
-        time.sleep(70)
 
 def on_enter(e):
     e.widget['background'] = '#262626'
@@ -175,22 +175,23 @@ stopwatch_label = tk.Label(text='00:00:00', font=(fontJet, 80), bg="#333333", fg
 stopwatch_label.pack()
 
 
-start_button = tk.Button(text='start', height=5, width=7, font=(fontJet, 20), command=start, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+start_button = tk.Button(text='start', height=5, width=7, font=(fontJet, 20), command=start, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2", relief= "flat", borderwidth= 0)
 start_button.bind("<Enter>", on_enter)
 start_button.bind("<Leave>", on_leave)
 start_button.pack(side=tk.LEFT)
 
-pause_button = tk.Button(text='pause', height=5, width=7, font=(fontJet, 20), command=pause, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+
+pause_button = tk.Button(text='pause', height=5, width=7, font=(fontJet, 20), command=pause, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2", relief= "flat", borderwidth= 0)
 pause_button.pack(side=tk.LEFT)
 pause_button.bind("<Enter>", on_enter)
 pause_button.bind("<Leave>", on_leave)
 
-reset_button = tk.Button(text='reset', height=5, width=7, font=(fontJet, 20), command=reset, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2")
+reset_button = tk.Button(text='reset', height=5, width=7, font=(fontJet, 20), command=reset, bg="#191919", fg="#b2b2b2", activebackground="#0C0C0C", activeforeground= "#b2b2b2", relief= "flat", borderwidth= 0)
 reset_button.pack(side=tk.LEFT)
 reset_button.bind("<Enter>", on_enter)
 reset_button.bind("<Leave>", on_leave)
 
-quit_button = tk.Button(text='quit', height=5, width=7, bg= "#330000", fg="#b2b2b2", font=(fontJet, 20),  activebackground="#260000", activeforeground= "#b2b2b2", command=root.quit)
+quit_button = tk.Button(text='quit', height=5, width=7, bg= "#330000", fg="#b2b2b2", font=(fontJet, 20),  activebackground="#260000", activeforeground= "#b2b2b2", relief= "flat", borderwidth= 0, command=root.quit)
 quit_button.bind("<Enter>", on_enter_exit)
 quit_button.bind("<Leave>", on_leave_exit)
 quit_button.pack(side=tk.RIGHT)
