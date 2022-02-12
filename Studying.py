@@ -12,7 +12,7 @@ notify = ToastNotifier()
 
 running = False
 
-hours, minutes, seconds = 0, 29, 56
+hours, minutes, seconds = 0, 0, 0
 
 rpc = Presence("942139758350569493")
 rpc.connect()
