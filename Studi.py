@@ -4,7 +4,7 @@ import os
 from win10toast import ToastNotifier 
 import time
 from pypresence import Presence
-
+from extra import clientid
 
 
 notify = ToastNotifier()
@@ -14,18 +14,19 @@ running = False
 
 hours, minutes, seconds = 0, 0, 0
 
-rpc = Presence("942139758350569493")
-rpc.connect()
-#state="Pordon me.", 
-#details = "Studying", 
-#large_image="studi", 
-#start=time.time(),
-#join="come study with me")
-rpc.update(details="Currently studying", state="Dont interrupt? pls ♥", large_image="studi", start=time.time(), buttons= [{"label": "Pc Price Tracker Bangladesh", "url": "https://www.pcpricetracker.co"},{"label": "ME", "url": "https://fb.iaevan.co"}])  # Set the presence
 
+global discord
+discord = False
 
+try:
+    rpc = Presence(clientid)
+    rpc.connect()
+    rpc.update(details="Currently studying", state="Dont interrupt? pls ♥", large_image="studi", start=time.time(), buttons= [{"label": "Pc Price Tracker Bangladesh", "url": "https://www.pcpricetracker.co"},{"label": "ME", "url": "https://fb.iaevan.co"}])  # Set the presence
+    discord = True
+except:
 
-
+    discord = False
+    pass
 
 
 
@@ -101,6 +102,7 @@ def reset():
 
 
 def update():
+    a=0
 
     global hours, minutes, seconds
     seconds += 1
@@ -142,6 +144,15 @@ def update():
         duration=5, 
         threaded=True
         )
+    global discord
+    if seconds % 15 == 0 and discord == False:
+        try:
+            rpc = Presence("942139758350569493")
+            rpc.connect()
+            rpc.update(details="Currently studying", state="Dont interrupt? pls ♥", large_image="studi", start=time.time(), buttons= [{"label": "Pc Price Tracker Bangladesh", "url": "https://www.pcpricetracker.co"},{"label": "ME", "url": "https://fb.iaevan.co"}])  # Set the presence
+            discord = True
+        except:
+            pass
 
 def on_enter(e):
     e.widget['background'] = '#262626'
