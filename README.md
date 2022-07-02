@@ -4,7 +4,7 @@ An app, basically a study timer, but has fun features.
 # What it does?
 1. basically a stopwatch, counts your time
 2. in every 10 minutes, its sends a notification to you to drink water
-3. in every 30 minutes it sends you a notification to take a break. 
+3. eventually it sends you a notification to take a break. 
 4. you can pause this thing, or you can reset.
 5. the **coolest** thing is you can set this up on your discord game activity, this was the main reason behind making this thing. 
 
